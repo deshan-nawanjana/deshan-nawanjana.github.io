@@ -1,0 +1,25 @@
+# Datasets for HTTP Request
+
+These datasets can be connected with other github deployments for testing purposes.
+
+### JavaScript Object Notation (.json)
+- [Animals](./json/animals.json)
+- [Coding References](./json/code.ref.json)
+- [Color Codes](./json/colors.json)
+- [CPU Benchmark](./json/cpu.list.json)
+- [Emojis](./json/emojis.json)
+- [English Words](./json/english.words.json)
+- [File Formats](./json/file.formats.json)
+- [Flowers](./json/flowers.json)
+- [Google Fonts](./json/fonts.google.json)
+- [Mime Types](./json/mime.types.json)
+- [Periodic Table](./json/periodic.table.json)
+- [Plants](./json/plants.json)
+- [Sri Lanka Postal Codes](./json/postal.codes.json)
+- [Sinhala & English](./json/sinhala.english.json)
+- [Sinhala Lyrics](./json/sinhala.lyrics.json)
+- [Cities of Sri Lanka](./json/srilanka.map.json)
+- [Symbols](./json/symbols.json)
+- [TV Series](./json/tv.series.json)
+- [Unicode Text Styles](./json/unicode.fonts.json)
+- [Cities of World](./json/world.map.json)

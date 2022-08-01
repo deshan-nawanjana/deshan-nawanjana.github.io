@@ -1,31 +1,96 @@
+@font-face {
+    font-family: "Inter Regular";
+    src: url(./assets/fonts/Inter-Regular.ttf);
+}
+
 * {
     user-select: none;
     outline: none;
     -webkit-tap-highlight-color: transparent;
+    font-family: "Inter Regular";
 }
 
 body {
     margin: 0px;
-    background-color: #1c1d21;
+    height: 100%;
+    overflow: hidden;
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
 }
 
-body > img {
-    max-width: 850px;
-    width: 80vw;
-    position: fixed;
+#root {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    cursor: grab;
+}
+
+.child {
+    position: absolute;
+    top: 0px;
+    left: 0px;
     opacity: 0;
-    transition-property: opacity, box-shadow, transform;
-    transition-duration: 0.3s;
+    transition: opacity 0.2s;
+}
+
+.child-inner {
+    width: 400px;
+    height: 400px;
+    background-color: #FFF;
+    border-radius: 20px;
+    transform: scale(1);
+    transition: all 0.2s;
+    opacity: 0.45;
+    box-shadow: 0px 0px 0px rgba(0,0,0,0.6);
+    font-size: 30px;
+    color: #F00;
+
+}
+
+.child[active="1"] { 
+    z-index: 100;
+    opacity: 1;
+}
+
+.child[active="0"] { 
+    z-index: 0;
+    opacity: 1;
+}
+
+.child[active="1"] > .child-inner {
+    filter: blur(1.5px);
+    opacity: 0.2;
+}
+
+.child[active="0"] > .child-inner {
+    filter: blur(5px);
+    opacity: 0.04;
+}
+
+.child[active="1"] > .child-inner:hover {
+    transform: scale(1.05);
+    opacity: 0.75;
+    box-shadow: 0px 0px 60px rgba(0,0,0,0.6);
+    filter: blur(0px);
+}
+
+.profile-link {
+    position: fixed;
+    left: 25px;
+    top: calc(100vh - 60px);
+    line-height: 40px;
+    color: #FFF;
     cursor: pointer;
-    box-shadow: 0px 0px 20px #1110;
-    transform: scale(1);
+    padding: 0px 20px 0px 40px;
+    background-image: url(./index.svg);
+    background-position: left;
+    background-size: auto 70%;
+    background-repeat: no-repeat;
+    opacity: 0.7;
+    transition: opacity 0.1s;
 }
 
-body > img:hover {
-    box-shadow: 0px 0px 50px #111F;
-    transform: scale(1.1);
-}
-
-body > img:active {
-    transform: scale(1);
+.profile-link:hover {
+    opacity: 0.9;
 }

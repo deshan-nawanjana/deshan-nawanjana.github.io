@@ -54,7 +54,7 @@ const update = () => {
 // rotate method
 const rotate = () => {
     // auto rotate only not hold
-    if(md === false && hv === false) { ax += 0.1 * dr }
+    if(md === false && hv === false) { ax += 0.06 * dr }
     // update children
     update()
     // request next frame
@@ -104,16 +104,7 @@ const total = arr => arr.reduce((x, y) => x + y)
 
 const request = () => {
     loadAPIs().then(data => {
-        window.data = data
-        qs('.profile-image').style.backgroundImage = `url(${data.profile.avatar_url})`
-        const repos = `${data.repos.length} Repos`
-        const stars = `${total(data.repos.map(x => x.stargazers_count))} Stars`
-        const folws = `${data.profile.followers} Followers`
-        qs('.profile-count').innerHTML = `
-            <span class="spr" click-open="{PROFILE}?tab=repositories">${repos}</span>
-            <span class="spr" click-open="{PROFILE}?tab=repositories">${stars}</span>
-            <span class="spr" click-open="{PROFILE}?tab=followers">${folws}</span>
-        `
+        Object.values(cards).forEach(x => x(data))
         rotate()
     })
 }

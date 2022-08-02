@@ -2,12 +2,16 @@
 let ax = 0
 // mouse down flag
 let md = false
+// hover lock flag
+let hv = false
 // auto rotate direction
 let dr = 1
 // gap for z direction
 let gz = 450
 // root element
 const root = document.querySelector('#root')
+
+let qs = x => document.querySelector(x)
 
 // circle coords method
 const circle = (radius, angle) => {
@@ -50,7 +54,7 @@ const update = () => {
 // rotate method
 const rotate = () => {
     // auto rotate only not hold
-    if(md === false) { ax += 0.1 * dr }
+    if(md === false && hv === false) { ax += 0.1 * dr }
     // update children
     update()
     // request next frame
@@ -86,19 +90,41 @@ window.addEventListener('mousemove', event => {
         // update direction on drag left
         if(event.movementX < 0) { dr = +1 }
     }
+
+    if(md === false) {
+        if(event.path.some(x => x.getAttribute && x.hasAttribute('active'))) {
+            hv = true
+        } else {
+            hv = false
+        }
+    }
 })
 
-// profile link onlick
-document.querySelector('.profile-link').addEventListener('click', () => {
-    window.open('https://github.com/deshan-nawanjana')
-})
+const total = arr => arr.reduce((x, y) => x + y)
 
 const request = () => {
     loadAPIs().then(data => {
-        children[0].children[0].style.backgroundImage = `url(${data.profile.avatar_url})`
+        window.data = data
+        qs('.profile-image').style.backgroundImage = `url(${data.profile.avatar_url})`
+        const repos = `${data.repos.length} Repos`
+        const stars = `${total(data.repos.map(x => x.stargazers_count))} Stars`
+        const folws = `${data.profile.followers} Followers`
+        qs('.profile-count').innerHTML = `
+            <span class="spr" click-open="{PROFILE}?tab=repositories">${repos}</span>
+            <span class="spr" click-open="{PROFILE}?tab=repositories">${stars}</span>
+            <span class="spr" click-open="{PROFILE}?tab=followers">${folws}</span>
+        `
         rotate()
     })
 }
+
+window.addEventListener('click', event => {
+    if(event.target.hasAttribute('click-open')) {
+        let link = event.target.getAttribute('click-open')
+        link = link.replace('{PROFILE}', 'https://github.com/deshan-nawanjana')
+        window.open(link)
+    }
+})
 
 // request api data onload
 window.addEventListener('load', request)

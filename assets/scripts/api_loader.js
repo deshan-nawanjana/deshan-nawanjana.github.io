@@ -10,6 +10,6 @@ const requestAPI = (url, body = null) => {
 const loadAPIs = async function() {
     const data = {}
     data.profile = await requestAPI('users/deshan-nawanjana')
-    data.repos = await requestAPI('users/deshan-nawanjana/repos')
+    data.repos = await requestAPI('users/deshan-nawanjana/repos?per_page=100')
     return data
 }

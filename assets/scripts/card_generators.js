@@ -21,7 +21,11 @@ cards.calendar = data => {
         const dys = obj.weeks[w].contributionDays
         for(let d = 0; d < dys.length; d++) {
             const e = document.createElement('div')
-            e.className = 'calendar-day day-level-' + color(dys[d].contributionCount)
+            const c = dys[d].contributionCount
+            e.className = 'calendar-day day-level-' + color(c)
+            if(c > 0) {
+                e.innerHTML = `<div class="day-tip">${c} Commits</div>`
+            }
             qs('.calendar-bottom').appendChild(e)
         }
     }

@@ -155,12 +155,14 @@ body {
 
 .calendar {
     text-align: center;
+    overflow: visible;
 }
 
 .calendar-top {
     background-color: #223344;
     color: #FFF;
     padding: 30px 0px 20px;
+    border-radius: 20px 20px 0px 0px;
 }
 
 .calendar-top-title {
@@ -179,6 +181,7 @@ body {
     height: 268px;
     padding: 16px 10px;
     cursor: pointer;
+    border-radius: 0px 0px 20px 20px;
 }
 
 .calendar-day {
@@ -194,3 +197,22 @@ body {
 .day-level-2 { background-color: #006d32; }
 .day-level-3 { background-color: #26a641; }
 .day-level-4 { background-color: #39d353; }
+
+.day-tip {
+    width: 70px;
+    position: relative;
+    top: -25px;
+    left: -30px;
+    line-height: 20px;
+    text-align: center;
+    background-color: #111E;
+    font-size: 10px;
+    display: none;
+    color: #FFF;
+    border-radius: 4px;
+    box-shadow: 0px 2px 10px #111;
+}
+
+.calendar-day:hover > .day-tip {
+    display: block;
+}

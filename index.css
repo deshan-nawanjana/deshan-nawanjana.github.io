@@ -31,7 +31,6 @@ body {
     top: 0px;
     left: 0px;
     opacity: 0;
-    transition: opacity 0.2s;
 }
 
 .child-inner {
@@ -60,12 +59,12 @@ body {
 
 .child[active="1"] > .child-inner {
     filter: blur(1.5px);
-    opacity: 0.2;
+    opacity: 0.45;
 }
 
 .child[active="0"] > .child-inner {
     filter: blur(5px);
-    opacity: 0.04;
+    opacity: 0.08;
 }
 
 .child[active="1"] > .child-inner:hover {

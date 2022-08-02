@@ -4,6 +4,8 @@ let ax = 0
 let md = false
 // auto rotate direction
 let dr = 1
+// gap for z direction
+let gz = 450
 // root element
 const root = document.querySelector('#root')
 
@@ -23,6 +25,8 @@ const children = Array.from(root.children)
 
 // update method
 const update = () => {
+    // toggle z gap by window orientation
+    gz = window.innerWidth < window.innerHeight && window.innerWidth < 1080 ? 3200 : 450
     // for each child
     for(let i = 0; i < children.length; i++) {
         // current child
@@ -32,12 +36,12 @@ const update = () => {
         // get child coords in circle
         const cxz = circle(620, cax)
         // set active prop by position
-        child.setAttribute('active', cxz.b > 200 ? 1 : 0)
+        child.setAttribute('active', cxz.b - 450 > -185.038 ? 1 : 0)
         // update transform styles
         child.style.transform = `
             translateX(calc(calc(50vw - 50%) - ${cxz.a}px))
             translateY(calc(calc(50vh - 50%) - 0px))
-            translateZ(calc(${cxz.b}px - 450px))
+            translateZ(calc(${cxz.b}px - ${gz}px))
             rotateY(${-cax}deg)
         `
     }
@@ -89,5 +93,12 @@ document.querySelector('.profile-link').addEventListener('click', () => {
     window.open('https://github.com/deshan-nawanjana')
 })
 
-// start rotate loop onload
-window.addEventListener('load', rotate)
+const request = () => {
+    loadAPIs().then(data => {
+        children[0].children[0].style.backgroundImage = `url(${data.profile.avatar_url})`
+        rotate()
+    })
+}
+
+// request api data onload
+window.addEventListener('load', request)

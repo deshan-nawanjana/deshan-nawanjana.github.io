@@ -1,11 +1,7 @@
 const requestAPI = (url, body = null) => {
     return new Promise((resolve, reject) => {
-        const endpoint = 'https://api.github.com/' + url
-        const options = {
-            headers : {
-                'Authorization' : 'Bearer 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'
-            }
-        }
+        const endpoint = url.indexOf(':') > -1 ? url : 'https://api.github.com/' + url
+        const options = {}
         if(body !== null) {
             options.method = 'POST'
             options.body = JSON.stringify(body)
@@ -20,17 +16,7 @@ const loadAPIs = async function() {
     const data = {}
     data.profile = await requestAPI('users/deshan-nawanjana')
     data.repos = await requestAPI('users/deshan-nawanjana/repos?per_page=100')
-    data.calendar = await requestAPI('graphql', {
-        query : `query($userName:String!) { 
-                user(login: $userName){ contributionsCollection {
-                    contributionCalendar { totalContributions
-                      weeks { contributionDays { contributionCount date } }
-                    }
-                  }
-                }
-              }`,
-        variables : { userName : 'deshan-nawanjana' }
-    })
+    data.calendar = await requestAPI('https://apis.dnjs.info/github_contributions/')
     data.calendar = data.calendar.data.user.contributionsCollection.contributionCalendar
     return data
 }

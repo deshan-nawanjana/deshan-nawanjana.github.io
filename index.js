@@ -92,7 +92,7 @@ window.addEventListener('mousemove', event => {
     }
 
     if(md === false) {
-        if(event.path.some(x => x.getAttribute && x.hasAttribute('active'))) {
+        if(event.composedPath().some(x => x.getAttribute && x.hasAttribute('active'))) {
             hv = true
         } else {
             hv = false

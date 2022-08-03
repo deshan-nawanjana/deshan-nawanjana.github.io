@@ -4,6 +4,8 @@ let ax = 0
 let md = false
 // hover lock flag
 let hv = false
+// auto rotate flag
+let rt = true
 // auto rotate direction
 let dr = 1
 // gap for z direction
@@ -54,7 +56,7 @@ const update = () => {
 // rotate method
 const rotate = () => {
     // auto rotate only not hold
-    if(md === false && hv === false) { ax += 0.06 * dr }
+    if(md === false && hv === false && rt) { ax += 0.06 * dr }
     // update children
     update()
     // request next frame

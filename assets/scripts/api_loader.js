@@ -40,15 +40,14 @@ const loadAPIs = async function() {
         // return cache
         return cache
     } else {
+        // display progress bar
+        qs('.loading-bar').style.display = 'block'
         // data object
         const data = {}
         // request from each endpoints
-        // data.profile = await requestAPI('users/deshan-nawanjana', 20)
-        // data.repos = await requestAPI('users/deshan-nawanjana/repos?per_page=100', 60)
-        // data.calendar = await requestAPI('https://apis.dnjs.info/github_contributions/', 100)
-        data.profile = await requestAPI('./local/data_profile.json', 20)
-        data.repos = await requestAPI('./local/data_repos.json', 60)
-        data.calendar = await requestAPI('./local/data_calendar.json', 100)    
+        data.profile = await requestAPI('users/deshan-nawanjana', 20)
+        data.repos = await requestAPI('users/deshan-nawanjana/repos?per_page=100', 60)
+        data.calendar = await requestAPI('https://apis.dnjs.info/github_contributions/', 100)
         // get calendar nested data
         data.calendar = data.calendar.data.user.contributionsCollection.contributionCalendar
         // sort repo array by starts

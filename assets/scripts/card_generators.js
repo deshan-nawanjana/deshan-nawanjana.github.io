@@ -28,12 +28,14 @@ cards.calendar = data => {
     const obj = data.calendar
     // update title with contributions count
     qs('.calendar-top-title').innerHTML = `${obj.totalContributions} Contributions`
+    // days count
+    let cnt = 0
     // for each week
-    for(let w = 0; w < obj.weeks.length; w++) {
+    for(let w = obj.weeks.length - 1; w >= 0; w--) {
         // get week days
         const dys = obj.weeks[w].contributionDays
         // for each day
-        for(let d = 0; d < dys.length; d++) {
+        for(let d = dys.length - 1; d >= 0; d--) {
             // create calendar item element
             const e = document.createElement('div')
             // get commits level
@@ -46,7 +48,11 @@ cards.calendar = data => {
                 e.innerHTML = `<div class="day-tip">${c} Commits</div>`
             }
             // append to calendar
-            qs('.calendar-bottom').appendChild(e)
+            qs('.calendar-bottom').prepend(e)
+            // increase days count
+            cnt += 1
+            // return after 368 days
+            if(cnt === 368) { return }
         }
     }
 }

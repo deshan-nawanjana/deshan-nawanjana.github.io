@@ -29,5 +29,18 @@ cards.calendar = data => {
             qs('.calendar-bottom').appendChild(e)
         }
     }
-    console.log(data.calendar)
+}
+
+cards.popular = data => {
+    const arr = data.repos
+    for(let i = 0; i < 6; i++) {
+        const e = document.createElement('div')
+        e.className = 'popular-item'
+        e.innerHTML = `
+            <div class="popular-open" click-open="${arr[i].html_url}"></div>
+            <div class="popular-title">${arr[i].name}</div>
+            <div class="popular-intro">${arr[i].description}</div>
+        `
+        qs('.popular-bottom').appendChild(e)
+    }
 }

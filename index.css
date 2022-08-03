@@ -312,8 +312,8 @@ body {
 
 .popular-bottom {
     background-color: #111a22;
-    height: 268px;
-    padding: 16px 10px;
+    height: 285px;
+    padding: 7.5px 10px;
     cursor: pointer;
     border-radius: 0px 0px 20px 20px;
 }
@@ -338,4 +338,51 @@ body {
     top: calc(50vh - 2.5px);
     left: calc(50vw - 200px);
     transition: box-shadow 0.4s;
+}
+
+.popular-item {
+    padding: 5px 8px;
+    text-align: left;
+    margin-bottom: 5px;
+    border-radius: 8px;
+    transition: all 0.3s;
+    opacity: 0.85;
+}
+
+.popular-item:hover {
+    background-color: #FFF2;
+    box-shadow: 0px 3px 20px #111;
+    transform: scale(1.035);
+    opacity: 1;
+}
+
+.popular-title {
+    font-size: 14px;
+    color: #FFFD;
+    padding-bottom: 4px;
+}
+
+.popular-intro {
+    font-size: 10px;
+    color: #FFF9;
+}
+
+.popular-open {
+    float: right;
+    width: 32px;
+    height: 32px;
+    background-image: url('data:image/svg+xml,<svg version="1.1" viewBox="0 0 24 24" width="200" height="200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="fill: rgb(255, 255, 255); opacity: 1; transform: rotate(0deg) scale(1, 1);"><g><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"></path></g></svg>');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 50% auto;
+    opacity: 0;
+    transition: all 0.1s;
+}
+
+.popular-item:hover > .popular-open {
+    opacity: 0.75;
+}
+
+.popular-open:hover {
+    opacity: 1 !important;
 }

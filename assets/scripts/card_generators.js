@@ -6,9 +6,9 @@ cards.profile = data => {
     const stars = `${total(data.repos.map(x => x.stargazers_count))} Stars`
     const folws = `${data.profile.followers} Followers`
     qs('.profile-count').innerHTML = `
-        <span class="spr" click-open="{PROFILE}?tab=repositories">${repos}</span>
-        <span class="spr" click-open="{PROFILE}?tab=repositories">${stars}</span>
-        <span class="spr" click-open="{PROFILE}?tab=followers">${folws}</span>
+        <span class="spr spr_repos" click-open="{PROFILE}?tab=repositories">${repos}</span>
+        <span class="spr spr_stars" click-open="{PROFILE}?tab=repositories">${stars}</span>
+        <span class="spr spr_folws" click-open="{PROFILE}?tab=followers">${folws}</span>
     `
 }
 

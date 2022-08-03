@@ -273,3 +273,69 @@ body {
 .calendar-day:hover > .day-tip {
     display: block;
 }
+
+.popular {
+    text-align: center;
+    overflow: visible;
+}
+
+.popular-top {
+    background-color: #223344;
+    color: #FFF;
+    padding: 30px 0px 20px;
+    border-radius: 20px 20px 0px 0px;
+}
+
+.popular-top-title {
+    line-height: 30px;
+    font-size: 20px;
+}
+
+.popular-top-title::after {
+    content: '.';
+    background-image: url('data:image/svg+xml,<svg version="1.1" viewBox="0 0 24 24" width="200" height="200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="fill: rgb(255, 255, 255); opacity: 1; transform: rotate(0deg) scale(1, 1);"><g><path d="M19 18l2 1V3c0-1.1-.9-2-2-2H8.99C7.89 1 7 1.9 7 3h10c1.1 0 2 .9 2 2v13zM15 5H5c-1.1 0-2 .9-2 2v16l7-3 7 3V7c0-1.1-.9-2-2-2z"></path></g></svg>');
+    background-size: 80% auto;
+    background-position: center 4px;
+    background-repeat: no-repeat;
+    color: transparent;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.popular-top-subtitle {
+    line-height: 20px;
+    font-size: 13px;
+    color: #FFF9;
+}
+
+.popular-bottom {
+    background-color: #111a22;
+    height: 268px;
+    padding: 16px 10px;
+    cursor: pointer;
+    border-radius: 0px 0px 20px 20px;
+}
+
+.loading-screen {
+    position: fixed;
+    z-index: 10;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    transition: opacity 0.8s;
+}
+
+.loading-bar {
+    width: 400px;
+    height: 5px;
+    background-color: #FFF2;
+    position: fixed;
+    top: calc(50vh - 2.5px);
+    left: calc(50vw - 200px);
+    transition: box-shadow 0.4s;
+}

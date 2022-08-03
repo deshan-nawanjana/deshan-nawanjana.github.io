@@ -12,11 +12,20 @@ const requestAPI = (url, body = null) => {
     })
 }
 
+const loadProgress = x => {
+    x = x / 100 * 400
+    qs('.loading-bar').style.boxShadow = `inset ${x}px 0px 0px 0px #FFF8`
+}
+
 const loadAPIs = async function() {
     const data = {}
+    loadProgress(0)
     data.profile = await requestAPI('users/deshan-nawanjana')
+    loadProgress(20)
     data.repos = await requestAPI('users/deshan-nawanjana/repos?per_page=100')
+    loadProgress(60)
     data.calendar = await requestAPI('https://apis.dnjs.info/github_contributions/')
     data.calendar = data.calendar.data.user.contributionsCollection.contributionCalendar
+    loadProgress(100)
     return data
 }

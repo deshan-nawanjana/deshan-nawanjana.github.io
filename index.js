@@ -1,3 +1,6 @@
+// query selector method
+let qs = x => document.querySelector(x)
+
 // current angle
 let ax = 0
 // mouse down flag
@@ -11,9 +14,9 @@ let dr = 1
 // gap for z direction
 let gz = 450
 // root element
-const root = document.querySelector('#root')
-
-let qs = x => document.querySelector(x)
+const root = qs('#root')
+// load element
+const load = qs('.loading-screen')
 
 // circle coords method
 const circle = (radius, angle) => {
@@ -65,6 +68,8 @@ const rotate = () => {
 
 // mousedown listener
 window.addEventListener('mousedown', () => {
+    // return while loading screen showing
+    if(event.target.className === 'loading-screen') { return }
     // update cursor
     root.style.cursor = 'grabbing'
     // update mousedown flag
@@ -73,6 +78,8 @@ window.addEventListener('mousedown', () => {
 
 // mouseup listener
 window.addEventListener('mouseup', () => {
+    // return while loading screen showing
+    if(event.target.className === 'loading-screen') { return }
     // update cursor
     root.style.cursor = 'grab'
     // update mousedown flag
@@ -81,6 +88,9 @@ window.addEventListener('mouseup', () => {
 
 // mousemove listener
 window.addEventListener('mousemove', event => {
+    // return while loading screen showing
+    if(event.target.className === 'loading-screen') { return }
+
     // only if mouse down
     if(md === true) {
         // update angle
@@ -107,7 +117,13 @@ const total = arr => arr.reduce((x, y) => x + y)
 const request = () => {
     loadAPIs().then(data => {
         Object.values(cards).forEach(x => x(data))
-        rotate()
+        setTimeout(() => {
+            load.style.opacity = 0
+            rotate()
+            setTimeout(() => {
+                load.style.display = 'none'
+            }, 300)
+        }, 300)
     })
 }
 

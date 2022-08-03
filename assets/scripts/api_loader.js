@@ -12,15 +12,22 @@ const requestAPI = (url, prg) => {
 }
 
 const cacheCheck = () => {
+    // get cache data from local storage
     const cache = localStorage['api-data']
+    // if cache available
     if(cache) {
+        // parse cache data
         const data = JSON.parse(cache)
-        if(Date.now() - data.time < 30 * 60 * 60 * 1000) {
+        // check cache expire time for 30 mins
+        if(Date.now() - data.time < 30 * 60 * 1000) {
+            // return valid cache
             return data.data
         } else {
+            // cache expired
             return null
         }
     } else {
+        // no cache
         return null
     }
 }
@@ -36,9 +43,12 @@ const loadAPIs = async function() {
         // data object
         const data = {}
         // request from each endpoints
-        data.profile = await requestAPI('users/deshan-nawanjana', 20)
-        data.repos = await requestAPI('users/deshan-nawanjana/repos?per_page=100', 60)
-        data.calendar = await requestAPI('https://apis.dnjs.info/github_contributions/', 100)
+        // data.profile = await requestAPI('users/deshan-nawanjana', 20)
+        // data.repos = await requestAPI('users/deshan-nawanjana/repos?per_page=100', 60)
+        // data.calendar = await requestAPI('https://apis.dnjs.info/github_contributions/', 100)
+        data.profile = await requestAPI('./local/data_profile.json', 20)
+        data.repos = await requestAPI('./local/data_repos.json', 60)
+        data.calendar = await requestAPI('./local/data_calendar.json', 100)    
         // get calendar nested data
         data.calendar = data.calendar.data.user.contributionsCollection.contributionCalendar
         // sort repo array by starts

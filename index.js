@@ -1,6 +1,8 @@
 // query selector method
 let qs = x => document.querySelector(x)
 
+// dev mode flag
+const dev = location.toString().includes('localhost')
 // current angle
 let ax = 0
 // mouse down flag
@@ -8,7 +10,7 @@ let md = false
 // hover lock flag
 let hv = false
 // auto rotate flag
-let rt = true
+let rt = dev ? false : true
 // auto rotate direction
 let dr = 1
 // gap for z direction
@@ -67,7 +69,7 @@ const rotate = () => {
 }
 
 // mousedown listener
-window.addEventListener('mousedown', () => {
+window.addEventListener('mousedown', event => {
     // return while loading screen showing
     if(event.target.className === 'loading-screen') { return }
     // update cursor
@@ -77,7 +79,7 @@ window.addEventListener('mousedown', () => {
 })
 
 // mouseup listener
-window.addEventListener('mouseup', () => {
+window.addEventListener('mouseup', event => {
     // return while loading screen showing
     if(event.target.className === 'loading-screen') { return }
     // update cursor
@@ -90,7 +92,6 @@ window.addEventListener('mouseup', () => {
 window.addEventListener('mousemove', event => {
     // return while loading screen showing
     if(event.target.className === 'loading-screen') { return }
-
     // only if mouse down
     if(md === true) {
         // update angle
@@ -102,35 +103,56 @@ window.addEventListener('mousemove', event => {
         // update direction on drag left
         if(event.movementX < 0) { dr = +1 }
     }
-
+    // only if mouse not down
     if(md === false) {
-        if(event.composedPath().some(x => x.getAttribute && x.hasAttribute('active'))) {
+        // check for hovering any active card
+        if(event.composedPath().some(x => {
+            return x.getAttribute && x.hasAttribute('active')
+        })) {
+            // disable auto rotate from hover flag
             hv = true
         } else {
+            // enable auto rotate from hover flag
             hv = false
         }
     }
 })
 
+// method to calculate total of an array
 const total = arr => arr.reduce((x, y) => x + y)
 
+// method to start
 const request = () => {
+    // laod data from apis
     loadAPIs().then(data => {
+        // call each generator
         Object.values(cards).forEach(x => x(data))
+        // get delay time for timout
+        const delay = dev ? 0 : 300
+        // timeout
         setTimeout(() => {
+            // decrease loading screen opacity
             load.style.opacity = 0
+            // start rotate
             rotate()
+            // timeout
             setTimeout(() => {
+                // hide loading screen
                 load.style.display = 'none'
-            }, 300)
-        }, 300)
+            }, delay)
+        }, delay)
     })
 }
 
+// click event on window
 window.addEventListener('click', event => {
+    // check for open window attribute
     if(event.target.hasAttribute('click-open')) {
+        // get link to open
         let link = event.target.getAttribute('click-open')
+        // replace from github profile url
         link = link.replace('{PROFILE}', 'https://github.com/deshan-nawanjana')
+        // open in new window
         window.open(link)
     }
 })

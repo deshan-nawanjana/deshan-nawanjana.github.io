@@ -68,10 +68,13 @@ const rotate = () => {
     requestAnimationFrame(rotate)
 }
 
+// rotate ignore elements
+const ignore = ['loading-screen']
+
 // mousedown listener
 window.addEventListener('mousedown', event => {
     // return while loading screen showing
-    if(event.target.className === 'loading-screen') { return }
+    if(ignore.some(x => event.target.classList.contains(x))) { return }
     // update cursor
     root.style.cursor = 'grabbing'
     // update mousedown flag
@@ -81,7 +84,7 @@ window.addEventListener('mousedown', event => {
 // mouseup listener
 window.addEventListener('mouseup', event => {
     // return while loading screen showing
-    if(event.target.className === 'loading-screen') { return }
+    if(ignore.some(x => event.target.classList.contains(x))) { return }
     // update cursor
     root.style.cursor = 'grab'
     // update mousedown flag
@@ -91,7 +94,7 @@ window.addEventListener('mouseup', event => {
 // mousemove listener
 window.addEventListener('mousemove', event => {
     // return while loading screen showing
-    if(event.target.className === 'loading-screen') { return }
+    if(ignore.some(x => event.target.classList.contains(x))) { return }
     // only if mouse down
     if(md === true) {
         // update angle

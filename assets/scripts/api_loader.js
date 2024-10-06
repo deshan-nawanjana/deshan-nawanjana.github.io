@@ -65,7 +65,7 @@ const loadAPIs = async function() {
             // request from each endpoints
             data.profile = await requestAPI('users/deshan-nawanjana', 20)
             data.repos = await requestAPI('users/deshan-nawanjana/repos?per_page=100', 60)
-            data.calendar = await requestAPI('https://apis.dnjs.info/github/contributions', 100)
+            data.calendar = await requestAPI('https://apis.dnjs.info/github/contributions.php', 100)
         }
         // get calendar nested data
         data.calendar = data.calendar.data.user.contributionsCollection.contributionCalendar

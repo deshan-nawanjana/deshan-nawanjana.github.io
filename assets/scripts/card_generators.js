@@ -20,7 +20,18 @@ cards.profile = data => {
 }
 
 // method to get commit color level
-const color = x => x > 4 ? 4 : x
+const color = x => {
+  // level 0
+  if (x <= 0) return 0
+  // level 1
+  if (x > 0 && x <= 5) return 1
+  // level 2
+  if (x > 5 && x <= 10) return 2
+  // level 3
+  if (x > 10 && x <= 15) return 3
+  // level 4
+  return 4
+}
 
 // method to generate calendar card
 cards.calendar = data => {

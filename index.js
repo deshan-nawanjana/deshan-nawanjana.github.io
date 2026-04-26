@@ -155,8 +155,8 @@ window.addEventListener('click', event => {
     let link = event.target.getAttribute('click-open')
     // replace from github profile url
     link = link.replace('{PROFILE}', 'https://github.com/deshan-nawanjana')
-    // open in new window
-    window.open(link)
+    // navigate to link
+    location.href = link
   }
 })
 
